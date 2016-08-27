@@ -1,0 +1,11 @@
+development:
+  rabbitmq:
+    url: <%= ENV["RABBITMQ_URL"] %>
+
+test:
+  rabbitmq:
+    url: amqp://localhost:5672
+
+production:
+  rabbitmq:
+    url: <%= ENV["RABBITMQ_URL"] %>
