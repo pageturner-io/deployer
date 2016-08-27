@@ -14,6 +14,12 @@ module Fake
         end
       end
 
+      def object(key = "")
+        @objects.find do |object|
+          object.key == key
+        end
+      end
+
     end
   end
 end

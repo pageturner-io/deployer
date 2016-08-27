@@ -2,8 +2,6 @@ module Concepts
   class Deployment
     attr_reader :from, :to
 
-    DEFAULT_ACL = "public-read".freeze
-
     def initialize(from, to)
       @from = from
       @to   = to
@@ -22,9 +20,17 @@ module Concepts
     private
 
     def copy(object)
-      to_bucket
+      from_bucket
         .object(object.key)
-        .copy_from(copy_source: "#{object.bucket_name}/#{object.key}", acl: DEFAULT_ACL)
+        .copy_to(
+          bucket:           to.name,
+          key:              unprefixed_key(object.key),
+          multipart_upload: true
+        )
+    end
+
+    def unprefixed_key(key)
+      key.remove(from.path)
     end
 
     def from_bucket

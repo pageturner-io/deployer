@@ -15,6 +15,10 @@ module Fake
       def copy_from(copy_source:, acl:)
 
       end
+
+      def copy_to(bucket:, key:, multipart_upload:)
+
+      end
     end
   end
 end
