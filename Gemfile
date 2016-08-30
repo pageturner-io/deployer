@@ -15,6 +15,9 @@ gem "sidekiq"
 gem "aws-sdk"
 gem "bunny"
 
+# Deployment
+gem "god"
+
 group :development, :test do
   gem "guard"
   gem "guard-rspec"

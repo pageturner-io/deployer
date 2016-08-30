@@ -28,6 +28,7 @@ GEM
     dotenv (2.1.1)
     ffi (1.9.14)
     formatador (0.2.5)
+    god (0.13.7)
     guard (2.14.0)
       formatador (>= 0.2.4)
       listen (>= 2.7, < 4.0)
@@ -120,6 +121,7 @@ DEPENDENCIES
   bunny-mock
   codeclimate-test-reporter
   dotenv
+  god
   guard
   guard-rspec
   i18n
