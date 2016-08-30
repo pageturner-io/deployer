@@ -23,6 +23,4 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 WORKDIR /home/app/deployer
 
-ENV APP_ROOT /home/app/deployer
-
 CMD ["bundle", "exec", "god", "-c", "deployer.god", "-D"]
