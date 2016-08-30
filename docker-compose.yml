@@ -1,0 +1,18 @@
+version: "2"
+
+services:
+  deployer:
+    build: .
+    links:
+      - rabbitmq
+    depends_on:
+      - rabbitmq
+    environment:
+      APP_ENV:
+      RABBITMQ_URL: amqp://rabbitmq:5672
+
+  rabbitmq:
+    image: rabbitmq:3.6-management
+    ports:
+      - 5672
+      - 15672

@@ -9,7 +9,6 @@ cache:
 sudo: required
 
 services:
-  - redis
   - docker
 
 env:
@@ -24,6 +23,5 @@ addons:
 
 script: bundle exec rspec
 
-
-# after_success:
-#   - ./script/deploy.sh
+after_success:
+  - ./script/deploy.sh
