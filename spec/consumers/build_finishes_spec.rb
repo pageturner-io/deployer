@@ -7,7 +7,7 @@ describe Consumers::BuildFinishes do
     subject do
       super().tap do |instance|
         instance.consume!
-        exchange.publish(event[:message].to_json, event[:options])
+        Hivent::Signal.new("build:finished").emit(payload, version: 1)
       end
     end
 
@@ -16,28 +16,13 @@ describe Consumers::BuildFinishes do
       let(:deployment_double) { double(Concepts::Deployment) }
       let(:source_double)     { double(Models::Source) }
       let(:target_double)     { double(Models::Source) }
-      let(:exchange)          { $rabbitmq_channel.topic("builds", durable: true) }
-      let(:event) do
+      let(:payload) do
         {
-          message: {
-            name: "build:finished",
-            id:   SecureRandom.hex,
-            meta: {
-              created_at: Time.now.iso8601(9),
-              cid:        SecureRandom.hex,
-              version:    1
-            },
-            payload: {
-              repository: "inf0rmer/inf0rmer.github.io",
-              location:   {
-                host:   "s3",
-                bucket: "pageturner-builds",
-                object: "inf0rmer/inf0rmer.github.io/1470750830/"
-              }
-            }
-          },
-          options: {
-            routing_key: "build:finished"
+          repository: "inf0rmer/inf0rmer.github.io",
+          location:   {
+            host:   "s3",
+            bucket: "pageturner-builds",
+            object: "inf0rmer/inf0rmer.github.io/1470750830/"
           }
         }
       end

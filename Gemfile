@@ -13,10 +13,12 @@ gem "dotenv"
 # App specifics
 gem "sidekiq"
 gem "aws-sdk"
-gem "bunny"
+gem "hivent"
+# This fork does not use instance_eval to evaluate event blocks
+gem "event_emitter", github: "inf0rmer/event_emitter"
 
 # Deployment
-gem "god"
+gem "foreman"
 
 group :development, :test do
   gem "guard"
@@ -28,7 +30,6 @@ group :test do
   gem "rspec"
   gem "rspec-its"
   gem "timecop"
-  gem "bunny-mock"
 
   # code coverage
   gem "simplecov",                 require: false
