@@ -18,7 +18,7 @@ gem "hivent"
 gem "event_emitter", github: "inf0rmer/event_emitter"
 
 # Deployment
-gem "god"
+gem "foreman"
 
 group :development, :test do
   gem "guard"

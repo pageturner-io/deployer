@@ -4,15 +4,12 @@ services:
   deployer:
     build: .
     links:
-      - rabbitmq
-    depends_on:
-      - rabbitmq
+      - hivent
     environment:
       APP_ENV:
-      RABBITMQ_URL: amqp://rabbitmq:5672
+      HIVENT_URL: redis://hivent:6379
 
-  rabbitmq:
-    image: rabbitmq:3.6-management
+  hivent:
+    image: redis:3.2
     ports:
-      - 5672
-      - 15672
+      - 6379
