@@ -5,21 +5,17 @@ module Consumers
     QUEUE_NAME    = "deployer".freeze
 
     def initialize
-      queue.bind(exchange, routing_key: EVENT_NAME)
+      @signal = Hivent::Signal.new(EVENT_NAME)
     end
 
     def consume!
-      queue.subscribe(block: true) do |_delivery_info, _properties, message|
-        payload = parse(message)[:payload]
-
+      @signal.receive(version: 1) do |event|
         Concepts::Deployment.new(
-          source_from(payload),
-          target_from(payload)
+          source_from(event[:payload]),
+          target_from(event[:payload])
         ).deploy!
       end
     end
-
-    private
 
     def source_from(payload)
       bucket = payload[:location][:bucket]
@@ -33,18 +29,6 @@ module Consumers
       bucket     = "#{ENV['S3_BUCKET_NAME']}-#{repository.gsub("/", "-")}"
 
       Models::Source.new(bucket)
-    end
-
-    def parse(message)
-      @parsed_message ||= JSON.parse(message).with_indifferent_access
-    end
-
-    def queue
-      @queue ||= $rabbitmq_channel.queue(QUEUE_NAME)
-    end
-
-    def exchange
-      @exchange ||= $rabbitmq_channel.topic(EXCHANGE_NAME, durable: true)
     end
   end
 end
