@@ -8,6 +8,7 @@ services:
     environment:
       APP_ENV:
       HIVENT_URL: redis://hivent:6379
+      HIVENT_PARTITION_COUNT: 4
 
   hivent:
     image: redis:3.2
