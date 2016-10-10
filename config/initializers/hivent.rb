@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 Hivent.configure do |config|
   config.backend         = :redis
   config.endpoint        = ENV["HIVENT_URL"]

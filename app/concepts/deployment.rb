@@ -1,7 +1,10 @@
+# frozen_string_literal: true
 require "app/models/source"
 
 module Concepts
+
   class Deployment
+
     attr_reader :from, :to
 
     def initialize(from, to)
@@ -48,4 +51,5 @@ module Concepts
     end
 
   end
+
 end

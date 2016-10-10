@@ -1,6 +1,10 @@
+# frozen_string_literal: true
 module Fake
+
   module S3
+
     class Object
+
       attr_reader :bucket, :key
 
       def initialize(bucket_name, key)
@@ -13,12 +17,13 @@ module Fake
       end
 
       def copy_from(copy_source:, acl:)
-
       end
 
       def copy_to(bucket:, key:, multipart_upload:)
-
       end
+
     end
+
   end
+
 end

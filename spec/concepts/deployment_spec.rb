@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require "app/concepts/deployment"
 
 describe Concepts::Deployment do
@@ -43,27 +44,27 @@ describe Concepts::Deployment do
 
     it "copies the contents of the given S3 object into the given bucket" do
       source_objects
-        .select do |object|
+        .select { |object|
           object.key.start_with?(source_path)
-        end
-        .each_with_index do |object, index|
+        }
+        .each_with_index { |object, index|
           key = source_object_names[index]
 
           expect(object).to receive(:copy_to)
             .with(bucket: target_name, key: key, multipart_upload: true)
-        end
+        }
 
       subject
     end
 
     it "does not copy objects that belong to another deployment" do
       source_objects
-        .reject do |object|
+        .reject { |object|
           object.key.start_with?(source_path)
-        end
-        .each do |object|
+        }
+        .each { |object|
           expect(object).not_to receive(:copy_from)
-        end
+        }
 
       subject
     end

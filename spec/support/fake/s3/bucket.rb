@@ -1,6 +1,10 @@
+# frozen_string_literal: true
 module Fake
+
   module S3
+
     class Bucket
+
       attr_reader :name
 
       def initialize(name, objects: [])
@@ -15,11 +19,13 @@ module Fake
       end
 
       def object(key = "")
-        @objects.find do |object|
+        @objects.detect do |object|
           object.key == key
         end
       end
 
     end
+
   end
+
 end

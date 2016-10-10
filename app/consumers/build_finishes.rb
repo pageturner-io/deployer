@@ -1,8 +1,11 @@
+# frozen_string_literal: true
 require "app/concepts/deployment"
 
 module Consumers
+
   class BuildFinishes
-    EVENT_NAME = "build:finished".freeze
+
+    EVENT_NAME = "build:finished"
 
     def consume!
       signal.receive(version: 1) do |event|
@@ -28,9 +31,11 @@ module Consumers
 
     def target_from(payload)
       repository = payload[:repository]
-      bucket     = "#{ENV['S3_BUCKET_NAME']}-#{repository.gsub("/", "-")}"
+      bucket     = "#{ENV['S3_BUCKET_NAME']}-#{repository.tr('/', '-')}"
 
       Models::Source.new(bucket)
     end
+
   end
+
 end
