@@ -1,8 +1,6 @@
 module Consumers
   class BuildFinishes
-    EVENT_NAME    = "build:finished".freeze
-    EXCHANGE_NAME = "builds".freeze
-    QUEUE_NAME    = "deployer".freeze
+    EVENT_NAME = "build:finished".freeze
 
     def initialize
       @signal = Hivent::Signal.new(EVENT_NAME)
