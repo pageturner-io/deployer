@@ -1,18 +1,22 @@
+require "app/concepts/deployment"
+
 module Consumers
   class BuildFinishes
     EVENT_NAME = "build:finished".freeze
 
-    def initialize
-      @signal = Hivent::Signal.new(EVENT_NAME)
-    end
-
     def consume!
-      @signal.receive(version: 1) do |event|
+      signal.receive(version: 1) do |event|
         Concepts::Deployment.new(
           source_from(event[:payload]),
           target_from(event[:payload])
         ).deploy!
       end
+    end
+
+    private
+
+    def signal
+      @signal ||= Hivent::Signal.new(EVENT_NAME)
     end
 
     def source_from(payload)

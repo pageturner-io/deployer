@@ -1,3 +1,5 @@
+require "app/models/source"
+
 module Concepts
   class Deployment
     attr_reader :from, :to

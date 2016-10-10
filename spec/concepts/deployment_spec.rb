@@ -1,3 +1,5 @@
+require "app/concepts/deployment"
+
 describe Concepts::Deployment do
 
   subject do

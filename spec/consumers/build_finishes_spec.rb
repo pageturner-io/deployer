@@ -1,3 +1,5 @@
+require "app/consumers/build_finishes"
+
 describe Consumers::BuildFinishes do
 
   subject { described_class.new }
