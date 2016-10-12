@@ -8,15 +8,11 @@ Encoding.default_internal = Encoding::UTF_8
 # common gems
 gem "json"
 gem "activesupport"
-gem "i18n"
 gem "dotenv"
 
 # App specifics
-gem "sidekiq"
 gem "aws-sdk"
 gem "hivent"
-# This fork does not use instance_eval to evaluate event blocks
-gem "event_emitter", github: "inf0rmer/event_emitter"
 
 # Deployment
 gem "foreman"
